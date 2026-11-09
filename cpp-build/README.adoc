@@ -1,0 +1,89 @@
+= C/C++ build
+
+> Fenrir ID: `cpp-build` +
+> Branch: `cpp-build` +
+> Points: `50`
+
+== Task submission
+
+Put all the systemd unit files in the `cpp-build` directory:
+
+[,text,subs="+macrosfolder"]
+----
+icon:folder[] ...
+├─ icon:folder[] cpp-build
+│  ├─ icon:folder[] broken
+│  │  └─ icon:file-text[] build.sh
+│  ├─ icon:folder[] c-cxx
+│  │  └─ icon:file-text[] build.sh
+│  ├─ icon:folder[] lib
+│  │  ├─ icon:file-text[] build-dynamic.sh
+│  │  ├─ icon:file-text[] build-static.sh
+│  │  ├─ icon:file-text[] multi.sh
+│  │  └─ icon:file-text[] runner.sh
+│  └─ icon:folder[] simple
+│     └─ icon:file-text[] build.sh
+└─ icon:folder[] .git
+----
+
+
+== Simple (5 points)
+
+Subdirectory: `simple`
+
+Create a script `build.sh`. It takes a single argument: output directory. The script must compile `main.cc` into `run` binary.
+
+== Static library (5 points)
+
+Subdirectory: `lib`
+
+Create a script `build-static.sh`. It takes a single argument: output directory. The script must compile `moduleA` and `moduleB` sources into `devtools` static library. Put the library into the `_OUT_DIR_/lib` directory and its associated headers into `_OUT_DIR_/include`.
+
+== Dynamic library (5 points)
+
+Subdirectory: `lib`
+
+Create a script `build-dynamic.sh`. It takes a single argument: output directory. The script must compile `moduleA` and `moduleB` sources into `devtools` dynamic library. Put the library into the `_OUT_DIR_/lib` directory and its associated headers into `_OUT_DIR_/include`.
+
+== Compiling with libraries (5 points)
+
+Subdirectory: `lib`
+
+Create a script `multi.sh`. It takes a single argument: output directory. The script must compile `moduleA` sources into `moda` static library and `moduleB` sources into `modb` dynamic library. Put the libraries into the `_OUT_DIR_/lib` directory and their associated headers into `_OUT_DIR_/include`. Compile `use.cc` which depends on both libraries into `_OUT_DIR_/run` binary.
+
+== Static linkage (10 points)
+
+Subdirectory: `lib`
+
+Create a script `runner.sh`. It takes a single argument: output directory. Use `build-static.sh` and `build-dynamic.sh` to create both dynamic and static variants of the `devtools` library. Now compile `use.cc`, which depends on `devtools`, into `_OUT_DIR_/run` binary. As you can see, the binary depends on the dynamic variant even though the static is present. Update the linker configuration so that it chooses the static variant.
+
+TIP: Use `-Bstatic` and `-Bdynamic` linker options
+
+== Using C code (10 points)
+
+Subdirectory: `c-cxx`
+
+Create a script `build.sh`. It takes a single argument: output directory. The `deps/deps.c` uses an old C standard: use `C89` to compile it. Compile all `.c` files according to the C ABI rules. Modify `main.cc` so that it can use the C code. The final binary must have name `run`.
+
+== Header problems (10 points)
+
+Subdirectory: `broken`
+
+Create a script `build.sh`. It takes a single argument: output directory. The script must compile `main.cpp` into `run` binary. However, the headers have several problems: update their code so that the compilation succeeds.
+
+== Questions
+* How to select C/C++ standard version?
+* How to add linker options?
+* How to see all dynamic lib dependencies of a file?
+* What are the problems the headers have?
+
+== Copyright
+
+pass:[<i class="fab fa-creative-commons"></i>]
+pass:[<i class="fab fa-creative-commons-by"></i>]
+pass:[<i class="fab fa-creative-commons-nc"></i>]
+pass:[<i class="fab fa-creative-commons-sa"></i>]
+
+The project is licensed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+(C) 2026-present *Iwan Kalinin* <mailto:koefic.cien@gmail.com[koefic.cien@gmail.com]>
