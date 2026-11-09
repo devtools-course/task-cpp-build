@@ -8,7 +8,7 @@
 
 Put all the systemd unit files in the `cpp-build` directory:
 
-[,text,subs="+macrosfolder"]
+[,text,subs="+macros"]
 ----
 icon:folder[] ...
 ├─ icon:folder[] cpp-build
